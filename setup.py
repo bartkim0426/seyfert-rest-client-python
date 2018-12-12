@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="seyfert-rest-client",
-    version="0.1.1",
+    version="0.1.2",
     author="bartkim0426",
     author_email="bartkim0426@gmail.com",
     description="REST client for seyfert wth python",
