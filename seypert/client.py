@@ -2,7 +2,7 @@ import json
 
 import requests
 
-__all__ = ['SEYFERT_URL', 'SeyfertAPI']
+__all__ = ['TEST_SEYFERT_URL', 'SEYFERT_URL', 'SeyfertAPI']
 
 TEST_SEYFERT_URL = 'https://stg5.paygate.net/'
 SEYFERT_URL = 'https://v5.paygate.net/'
@@ -70,6 +70,22 @@ class SeyfertAPI(object):
         return self.print_response(response)
 
     # MEMBER
+    def member_create(self, payload):
+        """
+        valid_payload = {
+            'emailTp': 'PERSONAL',
+            'nmLangCd': 'ko',
+            'phoneCntryCd': 'KOR',
+            'phoneTp': 'MOBILE',
+            'emailAddrss': 'test@test.com',
+            'fullname': 'seulchankim',
+            'phoneNo': '01011111111',
+        }
+        이 경우에 emailAddrss, phoneNo unique해야함
+        """
+        url = '{}v5a/member/createMember'.format(self.seyfert_url)
+        return self._post(url, payload=payload)
+
     def member_create_with_email(self, payload):
         """
         valid_payload = {
@@ -119,22 +135,6 @@ class SeyfertAPI(object):
             'dstMemGuid': guid,
         }
         return self._get(url, params=params)
-
-    def member_create(self, payload):
-        """
-        valid_payload = {
-            'emailTp': 'PERSONAL',
-            'nmLangCd': 'ko',
-            'phoneCntryCd': 'KOR',
-            'phoneTp': 'MOBILE',
-            'emailAddrss': 'test@test.com',
-            'fullname': 'seulchankim',
-            'phoneNo': '01011111111',
-        }
-        이 경우에 emailAddrss, phoneNo unique해야함
-        """
-        url = '{}v5a/member/createMember'.format(self.seyfert_url)
-        return self._post(url, payload=payload)
 
     def member_update(self, guid, params):
         """
